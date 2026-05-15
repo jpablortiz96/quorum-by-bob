@@ -1,6 +1,10 @@
 ---
 name: score-decision
-description: Recipe for calculating the Quorum Decision Confidence Score across 6 weighted dimensions. Used by The Judge in Round 3.
+description: |-
+  Calculates the Quorum Decision Confidence Score (DCS) — a weighted aggregate of 6 dimensions each scored 0-100.
+  Dimensions: Evidence Strength (20%), Historical Precedent (15%), Economic Viability (20%), Risk Assessment (20%, inverted), Technical Feasibility (15%), Council Consensus (10%).
+  Use this skill when The Judge needs to compute the final DCS from the 6 agent scores and determine the verdict threshold.
+  The score_dimension MCP tool registers individual scores and computes the running total automatically.
 ---
 
 # Skill: Decision Confidence Score Calculation
@@ -145,11 +149,13 @@ The `score_dimension` MCP tool allows agents to register their scores programmat
 
 ```
 Input: {
+  session_id: "ADR-2026-001",
   dimension: "economic_viability",
+  agent: "economist",
   value: 72,
   rationale: "Break-even at 14 months based on module_economics output"
 }
-Output: { registered: true, session_total: [accumulated scores] }
+Output: { registered: true, current_dcs: 58.4, current_verdict: "DEFER" }
 ```
 
 The Judge reads all registered scores and computes the final DCS.

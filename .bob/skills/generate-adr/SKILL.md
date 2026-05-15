@@ -1,6 +1,10 @@
 ---
 name: generate-adr
-description: Recipe for generating Architecture Decision Records in the Quorum standard format, ready to commit to the repository.
+description: |-
+  Generates an Architecture Decision Record (ADR) in the Quorum standard format, ready to commit to the repository.
+  Use this skill when The Judge has completed the verdict and needs to produce the final ADR document.
+  The ADR captures the decision question, council evidence, Decision Confidence Score breakdown, and binding consequences.
+  Filename format: ADR-YYYY-NNN-kebab-title.md. Save location: docs/decisions/.
 ---
 
 # Skill: Generate ADR (Architecture Decision Record)
@@ -111,5 +115,5 @@ Before saving the ADR, verify:
 - [ ] Status is one of: Accepted, Rejected, Deferred, Superseded
 - [ ] Every row in Evidence Summary has a `file:line` or `commit hash`
 - [ ] Consequences section has at least 1 Positive and 1 Negative
-- [ ] Decision Confidence Score adds to 100% weights
+- [ ] Decision Confidence Score weights add to 100%
 - [ ] File saved to `docs/decisions/` (not `draft/`)

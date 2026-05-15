@@ -4,6 +4,36 @@
 
 ---
 
+## Bob IDE Configuration Files (load order)
+
+1. **AGENTS.md** (this file) — project context, loaded on every conversation
+2. **`.bob/custom_modes.yaml`** — defines the 7 Council agents as selectable modes (🛡️ Conservative, 🔥 Reformer, 📜 Historian, 💰 Economist, ⚠️ Risk Officer, 🔧 Engineer, ⚖️ Judge)
+3. **`.bob/skills/*/SKILL.md`** — reusable workflow recipes Bob activates contextually (`council-debate`, `generate-adr`, `cite-evidence`, `score-decision`)
+4. **`.bob/rules/*.md`** — persistent instructions injected into every prompt (`evidence-first`, `bobcoin-frugal`)
+5. **`.bob/mcp.json`** — registers the `quorum-tools` MCP server with 5 tools
+
+## How to Invoke the Council
+
+**For a full architectural debate:**
+1. In Bob IDE, open the mode selector (bottom-left dropdown or `@` in chat)
+2. Select the first agent: `🛡️ The Conservative`
+3. Ask the decision question: *"Analyze whether we should [decision]"*
+4. Repeat for each agent in order (Reformer → Historian → Economist → Risk Officer → Engineer)
+5. Switch to `⚖️ The Judge` and ask: *"Synthesize the council reports and produce the verdict and ADR"*
+6. The Judge saves the ADR to `docs/decisions/`
+
+**Shortcut — use the `council-debate` skill:**
+- In chat, reference the skill: *"Use the council-debate skill to debate: [decision question]"*
+- Bob will orchestrate the 3-round protocol automatically
+
+**For quick git archaeology only:**
+- Switch to `📜 The Historian` and ask: *"Search for commits related to [keyword]"*
+- The Historian uses the `git_archaeology` MCP tool
+
+**All Council agents MUST cite evidence** (`file:line` or `commit hash`) before every claim. Uncited arguments are flagged as inadmissible by The Judge and receive zero weight.
+
+---
+
 ## Project Purpose
 
 **Quorum** is the first Multi-Agent Tribunal for Architectural Decision-Making. When a Tech Lead faces a high-stakes architectural decision — migrate a service, deprecate a legacy module, extract a microservice — instead of relying on tribal knowledge and gut feel, they convene a Council of 7 specialized AI agents. Each agent analyzes the repository from a distinct perspective, citing specific file references and commit hashes. The Council debates for 3 rounds, then The Judge synthesizes the evidence into a Decision Confidence Score (0–100) and a committable Architecture Decision Record (ADR).

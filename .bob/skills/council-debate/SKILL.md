@@ -1,6 +1,11 @@
 ---
 name: council-debate
-description: The 3-round structured debate protocol that governs how the 7 Quorum Council agents interact and produce a Decision Confidence Score.
+description: |-
+  Orchestrates a full 3-round Quorum Council debate for an architectural decision question.
+  Round 1: all 6 agents produce independent opening statements citing repository evidence.
+  Round 2: paired opponents cross-examine each other (Conservative vs Reformer, Historian vs Engineer, Economist vs Risk Officer).
+  Round 3: The Judge synthesizes evidence, calculates Decision Confidence Score, and produces a committable ADR.
+  Use this skill when the user invokes /council or asks for a full architectural debate.
 ---
 
 # Skill: Council Debate Protocol
@@ -66,7 +71,7 @@ This skill defines the exact sequence, responsibilities, and evidence requiremen
 
 **The Judge does NOT:** Access the repository directly, form opinions outside the presented evidence, or advocate for any position.
 
-**Output:** 
+**Output:**
 - Verdict Summary (Decision Confidence Score table + binding conditions)
 - Full ADR saved to `docs/decisions/ADR-YYYY-NNN-slug.md`
 

@@ -1,6 +1,10 @@
 ---
 name: cite-evidence
-description: Enforcer recipe that teaches all Quorum Council agents the exact citation format required. No citation = inadmissible argument.
+description: |-
+  Enforces the Quorum evidence citation standard across all council agents.
+  Every factual claim must cite a specific file:line or commit hash — no citation means the argument is inadmissible.
+  Use this skill to validate citations before including them in council reports, or to teach agents the correct citation format.
+  The cite_evidence MCP tool can validate that a file:line actually exists and return the code snippet.
 ---
 
 # Skill: Evidence Citation Protocol

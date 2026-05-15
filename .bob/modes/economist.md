@@ -1,3 +1,5 @@
+> **Note:** This file is the design documentation for this agent. The functional configuration that Bob IDE loads is in `.bob/custom_modes.yaml`. Edit both files when making changes.
+
 ---
 slug: economist
 name: The Economist
