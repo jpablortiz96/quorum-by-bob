@@ -65,8 +65,10 @@ export async function git_archaeology(input: GitArchaeologyInput): Promise<strin
   const seenHashes = new Set<string>();
 
   // ── Search by commit message keyword ─────────────────────
+  // NOTE: do NOT pass --format to git.log() — simple-git uses its own
+  // internal format and returns pre-parsed objects (hash, date, author_name,
+  // message). A custom --format breaks the parser and produces garbage.
   const logOptions: Record<string, string | null> = {
-    "--format": "%H|%ad|%an|%s",
     "--date": "short",
     "--since": sinceDate,
   };
@@ -87,9 +89,7 @@ export async function git_archaeology(input: GitArchaeologyInput): Promise<strin
     const logResult = await git.log({ ...logOptions, ...(branchArg.length ? { [branchArg[0]]: null } : {}) });
 
     for (const entry of logResult.all.slice(0, 50)) {
-      const parts = entry.hash.split("|");
-      if (parts.length < 4) continue;
-      const [hash, date, author, ...msgParts] = parts;
+      const hash = entry.hash;
       if (seenHashes.has(hash)) continue;
       seenHashes.add(hash);
 
@@ -99,7 +99,13 @@ export async function git_archaeology(input: GitArchaeologyInput): Promise<strin
         filesChanged = show.split("\n").filter((f) => f.trim().length > 0).slice(0, 10);
       } catch { /* skip */ }
 
-      commits.push({ hash: hash.substring(0, 7), date, author, message: msgParts.join("|"), files_changed: filesChanged });
+      commits.push({
+        hash: hash.substring(0, 7),
+        date: entry.date,
+        author: entry.author_name,
+        message: entry.message,
+        files_changed: filesChanged,
+      });
     }
   } catch (err) {
     debugLog(`git log error: ${err}`);
@@ -126,12 +132,11 @@ export async function git_archaeology(input: GitArchaeologyInput): Promise<strin
         const parts = line.split("|");
         if (parts.length < 4) continue;
         const [hash, date, author, ...msgParts] = parts;
-        const shortHash = hash.substring(0, 7);
-        if (seenHashes.has(shortHash)) continue;
-        seenHashes.add(shortHash);
+        if (seenHashes.has(hash)) continue;
+        seenHashes.add(hash);
 
         commits.push({
-          hash: shortHash,
+          hash: hash.substring(0, 7),
           date,
           author,
           message: `[file-match] ${msgParts.join("|")}`,
