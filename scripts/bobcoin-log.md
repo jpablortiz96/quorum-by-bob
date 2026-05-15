@@ -21,6 +21,7 @@ Update this log after every Bob IDE session. Actual cost comes from the Bob IDE 
 | Date | Task Description | Mode/Command | Estimated Cost | Actual Cost | Notes |
 |------|-----------------|-------------|----------------|-------------|-------|
 | 2026-05-15 | *— No sessions yet —* | — | — | — | Setup was done without Bob (free) |
+| 2026-05-15 | /init on Quorum workspace | Code | 1.0 | [2.24] | Generated enriched AGENTS.md + mode-specific context files in .bob/ |
 
 ---
 
@@ -43,3 +44,4 @@ Update this log after every Bob IDE session. Actual cost comes from the Bob IDE 
 - Use `/verdict` (~0.3 BC) when Round 1+2 drafts already exist — don't re-run 6 agents
 - Single file reads are essentially free — do targeted analysis before broad scans
 - Bob's Bobcoin counter resets per task — start a new task for each distinct council session
+
