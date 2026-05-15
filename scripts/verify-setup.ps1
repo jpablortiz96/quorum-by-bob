@@ -26,23 +26,19 @@ Write-Host ""
 # ── Runtime Tools ─────────────────────────────────────────────
 Write-Host "Runtime Tools" -ForegroundColor White
 
-# Node.js
 $nodeVersion = node --version 2>$null
 $nodeOk = $nodeVersion -match "v(\d+)\." -and [int]$Matches[1] -ge 20
-Check "Node.js >= 20" $nodeOk ($nodeVersion ?? "Not found")
+Check "Node.js >= 20" $nodeOk $(if ($nodeVersion) { $nodeVersion } else { "Not found" })
 
-# npm
 $npmVersion = npm --version 2>$null
-Check "npm" ($null -ne $npmVersion) ($npmVersion ?? "Not found")
+Check "npm" ($null -ne $npmVersion) $(if ($npmVersion) { $npmVersion } else { "Not found" })
 
-# Git
 $gitVersion = git --version 2>$null
-Check "Git" ($null -ne $gitVersion) ($gitVersion ?? "Not found")
+Check "Git" ($null -ne $gitVersion) $(if ($gitVersion) { $gitVersion } else { "Not found" })
 
-# Python 3.11+
 $pythonVersion = python --version 2>$null
 $pythonOk = $pythonVersion -match "Python 3\.(\d+)" -and [int]$Matches[1] -ge 11
-Check "Python 3.11+" $pythonOk ($pythonVersion ?? "Not found")
+Check "Python 3.11+" $pythonOk $(if ($pythonVersion) { $pythonVersion } else { "Not found" })
 
 Write-Host ""
 
@@ -51,17 +47,17 @@ Write-Host "Project Structure" -ForegroundColor White
 
 $root = Split-Path -Parent $PSScriptRoot
 
-Check ".bob/modes/ (7 files)" ((Get-ChildItem "$root\.bob\modes" -Filter "*.md" -ErrorAction SilentlyContinue).Count -eq 7) \
-    "$((Get-ChildItem "$root\.bob\modes" -Filter "*.md" -ErrorAction SilentlyContinue).Count)/7 mode files"
+$modeCount = (Get-ChildItem "$root\.bob\modes" -Filter "*.md" -ErrorAction SilentlyContinue).Count
+Check ".bob/modes/ (7 files)" ($modeCount -eq 7) "$modeCount/7 mode files"
 
-Check ".bob/commands/ (4 files)" ((Get-ChildItem "$root\.bob\commands" -Filter "*.md" -ErrorAction SilentlyContinue).Count -eq 4) \
-    "$((Get-ChildItem "$root\.bob\commands" -Filter "*.md" -ErrorAction SilentlyContinue).Count)/4 command files"
+$cmdCount = (Get-ChildItem "$root\.bob\commands" -Filter "*.md" -ErrorAction SilentlyContinue).Count
+Check ".bob/commands/ (4 files)" ($cmdCount -eq 4) "$cmdCount/4 command files"
 
-Check ".bob/skills/ (4 files)" ((Get-ChildItem "$root\.bob\skills" -Filter "*.md" -ErrorAction SilentlyContinue).Count -eq 4) \
-    "$((Get-ChildItem "$root\.bob\skills" -Filter "*.md" -ErrorAction SilentlyContinue).Count)/4 skill files"
+$skillCount = (Get-ChildItem "$root\.bob\skills" -Filter "*.md" -ErrorAction SilentlyContinue).Count
+Check ".bob/skills/ (4 files)" ($skillCount -eq 4) "$skillCount/4 skill files"
 
-Check ".bob/rules/ (2 files)" ((Get-ChildItem "$root\.bob\rules" -Filter "*.md" -ErrorAction SilentlyContinue).Count -eq 2) \
-    "$((Get-ChildItem "$root\.bob\rules" -Filter "*.md" -ErrorAction SilentlyContinue).Count)/2 rule files"
+$ruleCount = (Get-ChildItem "$root\.bob\rules" -Filter "*.md" -ErrorAction SilentlyContinue).Count
+Check ".bob/rules/ (2 files)" ($ruleCount -eq 2) "$ruleCount/2 rule files"
 
 Check ".bob/mcp.json" (Test-Path "$root\.bob\mcp.json")
 Check "AGENTS.md" (Test-Path "$root\AGENTS.md")
@@ -95,7 +91,7 @@ if ($galaxiumExists) {
     Check "demo-repo is a git repository" $isGitRepo
 
     $fileCount = (Get-ChildItem $galaxiumPath -Recurse -File -ErrorAction SilentlyContinue |
-        Where-Object { $_.FullName -notmatch "\\\.git\\" }).Count
+        Where-Object { $_.FullName -notmatch "\\\." }).Count
     Check "demo-repo has files" ($fileCount -gt 10) "$fileCount files found"
 }
 
@@ -115,16 +111,16 @@ Write-Host ""
 Write-Host "Git Repository" -ForegroundColor White
 
 $remoteUrl = git -C $root remote get-url origin 2>$null
-Check "Remote origin configured" ($null -ne $remoteUrl) ($remoteUrl ?? "No remote")
+Check "Remote origin configured" ($null -ne $remoteUrl) $(if ($remoteUrl) { $remoteUrl } else { "No remote" })
 
 Write-Host ""
 
 # ── Summary ────────────────────────────────────────────────────
 Write-Host "======================================" -ForegroundColor Cyan
 if ($allPassed) {
-    Write-Host "  ALL CHECKS PASSED — Ready to go!" -ForegroundColor Green
+    Write-Host "  ALL CHECKS PASSED -- Ready to go!" -ForegroundColor Green
 } else {
-    Write-Host "  SOME CHECKS FAILED — See above." -ForegroundColor Red
+    Write-Host "  SOME CHECKS FAILED -- See above." -ForegroundColor Red
     Write-Host ""
     Write-Host "  Quick fixes:" -ForegroundColor Yellow
     Write-Host "    npm deps:    cd mcp-server; npm install; npm run build" -ForegroundColor Yellow
