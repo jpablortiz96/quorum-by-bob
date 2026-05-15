@@ -1,5 +1,10 @@
 # Galaxium Travels — Context for the Quorum Council
 
+> **Repository Inspection Snapshot** — This document reflects the state of `demo-repo/galaxium-travels` as of 2026-05-15. To regenerate context after re-cloning, run:
+> ```powershell
+> powershell -ExecutionPolicy Bypass -File scripts/inspect-demo-repo.ps1
+> ```
+
 This document is loaded by Council agents when debating decisions about the Galaxium Travels demo repository. It captures non-obvious architectural patterns discovered during `/init` — information that is not obvious from a surface read of the codebase and that directly affects the quality of council arguments.
 
 ## Repository Location

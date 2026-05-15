@@ -53,7 +53,8 @@ interface SessionScores {
 }
 
 function getSessionFilePath(sessionId: string): string {
-  const sessionsDir = path.join(process.cwd(), "..", "docs", "decisions", "draft");
+  // cwd = workspace root when launched by Bob IDE
+  const sessionsDir = path.join(process.cwd(), "docs", "decisions", "draft");
   if (!fs.existsSync(sessionsDir)) {
     fs.mkdirSync(sessionsDir, { recursive: true });
   }

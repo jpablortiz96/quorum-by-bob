@@ -38,7 +38,8 @@ function parseLineRange(lines: string): { start: number; end: number } | null {
 }
 
 export async function cite_evidence(input: CiteEvidenceInput): Promise<string> {
-  const repoPath = input.repo_path ?? path.join(process.cwd(), "..", "demo-repo", "galaxium-travels");
+  // cwd = workspace root when launched by Bob IDE
+  const repoPath = input.repo_path ?? path.join(process.cwd(), "demo-repo", "galaxium-travels");
   const absoluteFile = path.join(repoPath, input.file);
 
   const result: CiteEvidenceResult = {

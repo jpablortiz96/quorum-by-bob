@@ -63,7 +63,8 @@ function getAllFiles(dir: string, extensions: string[]): string[] {
 }
 
 export async function dependency_blast_radius(input: DependencyBlastRadiusInput): Promise<string> {
-  const repoPath = input.repo_path ?? path.join(process.cwd(), "..", "demo-repo", "galaxium-travels");
+  // cwd = workspace root when launched by Bob IDE
+  const repoPath = input.repo_path ?? path.join(process.cwd(), "demo-repo", "galaxium-travels");
 
   if (!fs.existsSync(repoPath)) {
     return JSON.stringify({

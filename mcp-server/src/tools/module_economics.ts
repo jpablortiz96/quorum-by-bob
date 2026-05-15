@@ -62,7 +62,8 @@ function getFiles(dir: string): string[] {
 }
 
 export async function module_economics(input: ModuleEconomicsInput): Promise<string> {
-  const repoPath = input.repo_path ?? path.join(process.cwd(), "..", "demo-repo", "galaxium-travels");
+  // cwd = workspace root when launched by Bob IDE
+  const repoPath = input.repo_path ?? path.join(process.cwd(), "demo-repo", "galaxium-travels");
   const hourlyRate = input.hourly_rate ?? 80;
   const targetDir = path.join(repoPath, input.directory_path);
 
