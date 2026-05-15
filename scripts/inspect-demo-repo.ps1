@@ -1,5 +1,4 @@
-#!/usr/bin/env pwsh
-# Diagnose demo-repo/galaxium-travels before spending Bobcoins.
+﻿# Diagnose demo-repo/galaxium-travels before spending Bobcoins.
 # Run: powershell -ExecutionPolicy Bypass -File scripts/inspect-demo-repo.ps1
 
 $ErrorActionPreference = "Continue"
@@ -9,7 +8,7 @@ $repoPath  = "$root\demo-repo\galaxium-travels"
 
 Write-Host ""
 Write-Host "======================================" -ForegroundColor Cyan
-Write-Host "  GALAXIUM TRAVELS — REPO INSPECTION" -ForegroundColor Cyan
+Write-Host "  GALAXIUM TRAVELS - REPO INSPECTION" -ForegroundColor Cyan
 Write-Host "======================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -19,10 +18,10 @@ if (-not (Test-Path "$repoPath\.git")) {
     exit 1
 }
 
-# ── Shallow clone check ───────────────────────────────────────
+# -- Shallow clone check ----------------------------------------------
 $isShallow = Test-Path "$repoPath\.git\shallow"
 if ($isShallow) {
-    Write-Host "  [WARN] SHALLOW CLONE DETECTED — git_archaeology will fail." -ForegroundColor Red
+    Write-Host "  [WARN] SHALLOW CLONE DETECTED - git_archaeology will fail." -ForegroundColor Red
     Write-Host "         Run: Remove-Item -Recurse -Force demo-repo\galaxium-travels" -ForegroundColor Yellow
     Write-Host "              .\scripts\clone-demo-repo.ps1" -ForegroundColor Yellow
     Write-Host ""
@@ -30,7 +29,7 @@ if ($isShallow) {
     Write-Host "  [OK] Full clone (no shallow marker)" -ForegroundColor Green
 }
 
-# ── Basic stats ───────────────────────────────────────────────
+# -- Basic stats ------------------------------------------------------
 Write-Host "Basic Stats" -ForegroundColor White
 
 $totalCommits  = git -C $repoPath rev-list --count HEAD 2>$null
@@ -48,7 +47,7 @@ Write-Host "  All branches:"
 $allBranches | ForEach-Object { Write-Host "    $_" -ForegroundColor Gray }
 Write-Host ""
 
-# ── Keyword frequency in commit messages ─────────────────────
+# -- Keyword frequency in commit messages -----------------------------
 Write-Host "Commit Keyword Frequency (in message)" -ForegroundColor White
 $keywords = @("booking", "flight", "user", "validation", "auth", "refactor", "fix", "TODO", "deprecate", "migrate", "revert", "test", "error", "service")
 
@@ -63,7 +62,7 @@ foreach ($kw in $keywords) {
 $keywordStats | Sort-Object Commits -Descending | Format-Table -AutoSize
 Write-Host ""
 
-# ── Most-modified files (all time, across all branches) ──────
+# -- Most-modified files (all time, across all branches) --------------
 Write-Host "Top 15 Most-Modified Files (all history)" -ForegroundColor White
 
 $allFiles = git -C $repoPath log --all --name-only --pretty=format: 2>$null |
@@ -77,7 +76,7 @@ $allFiles | ForEach-Object {
 }
 Write-Host ""
 
-# ── Most-modified files (last 90 days) ───────────────────────
+# -- Most-modified files (last 90 days) -------------------------------
 Write-Host "Top 10 Most-Modified Files (last 90 days)" -ForegroundColor White
 
 $since90 = (Get-Date).AddDays(-90).ToString("yyyy-MM-dd")
@@ -96,7 +95,7 @@ if ($recentFiles) {
 }
 Write-Host ""
 
-# ── Commit count per branch ────────────────────────────────────
+# -- Commit count per branch ------------------------------------------
 Write-Host "Commits per Remote Branch" -ForegroundColor White
 
 $remoteBranches = git -C $repoPath branch -r 2>$null | Where-Object { $_ -notmatch "HEAD" }
@@ -107,16 +106,16 @@ foreach ($branch in $remoteBranches) {
 }
 Write-Host ""
 
-# ── Summary for Council ───────────────────────────────────────
+# -- Summary for Council ----------------------------------------------
 Write-Host "======================================" -ForegroundColor Cyan
 if ([int]$totalCommits -ge 10) {
-    Write-Host "  RICH HISTORY — Ready for Quorum Council" -ForegroundColor Green
+    Write-Host "  RICH HISTORY - Ready for Quorum Council" -ForegroundColor Green
     Write-Host "  The Historian has enough evidence to work with." -ForegroundColor Green
 } elseif ([int]$totalCommits -gt 1) {
-    Write-Host "  THIN HISTORY ($totalCommits commits) — Limited archaeology" -ForegroundColor Yellow
+    Write-Host "  THIN HISTORY ($totalCommits commits) - Limited archaeology" -ForegroundColor Yellow
     Write-Host "  Consider --no-single-branch clone to access more branches." -ForegroundColor Yellow
 } else {
-    Write-Host "  SHALLOW/EMPTY — Re-clone required" -ForegroundColor Red
+    Write-Host "  SHALLOW/EMPTY - Re-clone required" -ForegroundColor Red
     Write-Host "  Run: Remove-Item -Recurse -Force demo-repo\galaxium-travels" -ForegroundColor Yellow
     Write-Host "       .\scripts\clone-demo-repo.ps1" -ForegroundColor Yellow
 }
