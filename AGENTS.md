@@ -2,6 +2,8 @@
 
 > Bob reads this file at the start of every conversation. It is the single source of truth for how the Quorum Council operates. Do not modify it during a session; update it between sessions.
 
+> **For debates about Galaxium Travels (the demo case), see also `docs/galaxium-context.md`** which captures non-obvious architectural patterns of that codebase (dual-protocol server, service layer error returns, double-patch test setup, snake_case type coupling, and more). Council agents should read it before starting any council session targeting `demo-repo/galaxium-travels/`.
+
 ---
 
 ## Bob IDE Configuration Files (load order)

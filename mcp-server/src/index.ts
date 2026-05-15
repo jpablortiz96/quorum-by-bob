@@ -211,7 +211,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  process.stderr.write("Quorum Tools MCP server running on stdio\n");
+  if (process.env.QUORUM_DEBUG) {
+    process.stderr.write("[quorum-tools] MCP server connected via stdio\n");
+  }
 }
 
 main().catch((err) => {
