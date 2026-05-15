@@ -1,0 +1,57 @@
+{
+  "session_id": "quorum-2026-001",
+  "created_at": "2026-05-15T21:55:09.440Z",
+  "updated_at": "2026-05-15T21:55:48.168Z",
+  "scores": {
+    "evidence_strength": [
+      {
+        "agent": "judge",
+        "value": 75,
+        "rationale": "3 of 6 agents provided reports with strong citations (commits 4156ec0, 8f7ad7f, file:line refs), but 50% of council missing reduces overall evidence base",
+        "timestamp": "2026-05-15T21:55:09.440Z"
+      }
+    ],
+    "historical_precedent": [
+      {
+        "agent": "judge",
+        "value": 50,
+        "rationale": "Historian report missing; Reformer cited commits 4156ec0 and 8f7ad7f showing 13-day failed experiment, but no comprehensive git archaeology performed",
+        "timestamp": "2026-05-15T21:55:16.358Z"
+      }
+    ],
+    "economic_viability": [
+      {
+        "agent": "judge",
+        "value": 95,
+        "rationale": "Economist showed $18,240 avoided annual costs, 4.1-month break-even, 773% 3-year ROI per module_economics analysis",
+        "timestamp": "2026-05-15T21:55:24.485Z"
+      }
+    ],
+    "risk_assessment": [
+      {
+        "agent": "judge",
+        "value": 85,
+        "rationale": "Risk Officer scored 85/100 (inverted: high score = low risk); consolidation eliminated integration, deployment, and polyglot risks per dependency_blast_radius analysis",
+        "timestamp": "2026-05-15T21:55:31.517Z"
+      }
+    ],
+    "technical_feasibility": [
+      {
+        "agent": "judge",
+        "value": 60,
+        "rationale": "Engineer report missing; Reformer cited server.py:1-190 showing working FastAPI implementation, but no formal feasibility analysis of consolidation approach",
+        "timestamp": "2026-05-15T21:55:38.802Z"
+      }
+    ],
+    "council_consensus": [
+      {
+        "agent": "judge",
+        "value": 100,
+        "rationale": "All 3 available agents (Reformer, Economist, Risk Officer) unanimously support consolidation decision; no dissenting voices in submitted reports",
+        "timestamp": "2026-05-15T21:55:48.168Z"
+      }
+    ]
+  },
+  "computed_dcs": 77.5,
+  "verdict": "PROCEED WITH CONDITIONS"
+}
