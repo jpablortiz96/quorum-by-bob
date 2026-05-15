@@ -22,6 +22,7 @@ Update this log after every Bob IDE session. Actual cost comes from the Bob IDE 
 |------|-----------------|-------------|----------------|-------------|-------|
 | 2026-05-15 | *— No sessions yet —* | — | — | — | Setup was done without Bob (free) |
 | 2026-05-15 | /init on Quorum workspace | Code | 1.0 | [2.24] | Generated enriched AGENTS.md + mode-specific context files in .bob/ |
+| 2026-05-15 | /init on Galaxium Travels (demo repo context) | Code | 1.0 | [1.10] | Enriched context for Council debates on demo case study |
 
 ---
 
