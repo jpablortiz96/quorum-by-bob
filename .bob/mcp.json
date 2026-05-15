@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "quorum-tools": {
+      "command": "node",
+      "args": ["./mcp-server/dist/index.js"],
+      "type": "stdio",
+      "alwaysAllow": [
+        "git_archaeology",
+        "dependency_blast_radius",
+        "module_economics",
+        "cite_evidence",
+        "score_dimension"
+      ]
+    }
+  }
+}
