@@ -58,7 +58,7 @@ export default function DashboardPage() {
       {/* Top nav */}
       <div className="border-b border-[#262626] bg-[#161616]/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-[1400px] mx-auto px-8 py-4 flex items-center justify-between">
-          <span className="font-bold tracking-wider text-[#f4f4f4]">⚖️ QUORUM</span>
+          <span className="font-bold tracking-wider text-[#f4f4f4]">&#9878;&#65039; QUORUM</span>
           <span className="text-xs text-[#8d8d8d] font-mono">Architectural Health Monitor</span>
         </div>
       </div>
@@ -94,15 +94,15 @@ export default function DashboardPage() {
         {/* Health Score */}
         <motion.div variants={FADE_UP} initial="hidden" animate="show" transition={{ delay: 0.3 }}>
           <div className="text-xs font-medium uppercase tracking-widest text-[#8d8d8d] mb-4">
-            Repository Health Assessment — Galaxium Travels
+            Repository Health Assessment - Galaxium Travels
           </div>
-          <div className="rounded-xl border border-[#393939] bg-[#393939] p-8">
+          <div className="rounded-xl border border-[#393939] bg-[#262626] p-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
               <div className="flex justify-center">
                 {health ? (
                   <HealthGauge score={health.overallScore} label="QUORUM Health Score" size={200} />
                 ) : (
-                  <div className="w-[200px] h-[120px] bg-[#262626] rounded-lg animate-pulse" />
+                  <div className="w-[200px] h-[120px] bg-[#393939] rounded-lg animate-pulse" />
                 )}
               </div>
 
@@ -116,7 +116,7 @@ export default function DashboardPage() {
                   </>
                 ) : (
                   <div className="space-y-3">
-                    {[1, 2, 3, 4].map((i) => <div key={i} className="h-12 bg-[#262626] rounded animate-pulse" />)}
+                    {[1, 2, 3, 4].map((i) => <div key={i} className="h-12 bg-[#393939] rounded animate-pulse" />)}
                   </div>
                 )}
               </div>
@@ -128,15 +128,15 @@ export default function DashboardPage() {
                 {health ? (
                   <HealthRadar dimensions={health.dimensions} />
                 ) : (
-                  <div className="h-[220px] bg-[#262626] rounded-lg animate-pulse" />
+                  <div className="h-[220px] bg-[#393939] rounded-lg animate-pulse" />
                 )}
                 {health && (
                   <div className="mt-3 grid grid-cols-2 gap-2">
                     {[
-                      { label: "Decision Quality", value: health.dimensions.decisionQuality, color: "#10b981" },
-                      { label: "Tribal Risk", value: health.dimensions.tribalKnowledgeRisk, color: "#ef4444" },
-                      { label: "Reverted", value: health.dimensions.revertedDecisions, color: "#f59e0b" },
-                      { label: "Coverage", value: health.dimensions.tribunalCoverage, color: "#a78bfa" },
+                      { label: "Decision Quality", value: health.dimensions.decisionQuality, color: "#42be65" },
+                      { label: "Tribal Risk", value: health.dimensions.tribalKnowledgeRisk, color: "#fa4d56" },
+                      { label: "Reverted", value: health.dimensions.revertedDecisions, color: "#f1c21b" },
+                      { label: "Coverage", value: health.dimensions.tribunalCoverage, color: "#be95ff" },
                     ].map((d) => (
                       <div key={d.label} className="flex items-center gap-1.5">
                         <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
@@ -158,11 +158,11 @@ export default function DashboardPage() {
               <h2 className="text-lg font-semibold text-[#f4f4f4]">Architecture Decision Records</h2>
               <p className="text-xs text-[#8d8d8d] mt-0.5">Committed decisions produced by the Quorum Council</p>
             </div>
-            <span className="text-xs font-mono text-[#8d8d8d] bg-[#393939] border border-[#393939] px-3 py-1.5 rounded-lg">
+            <span className="text-xs font-mono text-[#8d8d8d] bg-[#262626] border border-[#393939] px-3 py-1.5 rounded-lg">
               {adrs.length} ADR{adrs.length !== 1 ? "s" : ""}
             </span>
           </div>
-          <div className="rounded-xl border border-[#393939] bg-[#393939] p-6">
+          <div className="rounded-xl border border-[#393939] bg-[#262626] p-6">
             <ADRList adrs={adrs} />
           </div>
         </motion.div>
@@ -170,9 +170,9 @@ export default function DashboardPage() {
         {/* DCS Breakdown */}
         <motion.div variants={FADE_UP} initial="hidden" animate="show" transition={{ delay: 0.55 }}>
           <div className="text-xs font-medium uppercase tracking-widest text-[#8d8d8d] mb-4">
-            Latest DCS Breakdown — ADR-2026-001
+            Latest DCS Breakdown - ADR-2026-001
           </div>
-          <div className="rounded-xl border border-[#393939] bg-[#393939] p-6">
+          <div className="rounded-xl border border-[#393939] bg-[#262626] p-6">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {[
                 { label: "Evidence Strength", score: 82, weight: 20 },
@@ -182,14 +182,14 @@ export default function DashboardPage() {
                 { label: "Technical Feasibility", score: 50, weight: 15 },
                 { label: "Council Consensus", score: 83, weight: 10 },
               ].map((d) => {
-                const color = d.score >= 70 ? "#10b981" : d.score >= 50 ? "#f59e0b" : "#ef4444";
+                const color = d.score >= 70 ? "#42be65" : d.score >= 50 ? "#f1c21b" : "#fa4d56";
                 return (
                   <div key={d.label} className="bg-[#161616] rounded-lg p-4 border border-[#262626]">
                     <div className="text-xs text-[#8d8d8d] mb-2">{d.label}</div>
                     <div className="text-2xl font-bold tabular-nums mb-1" style={{ color }}>
                       {d.score}
                     </div>
-                    <div className="w-full h-1 bg-[#262626] rounded-full">
+                    <div className="w-full h-1 bg-[#393939] rounded-full">
                       <div className="h-full rounded-full" style={{ width: `${d.score}%`, backgroundColor: color }} />
                     </div>
                     <div className="text-[10px] text-[#8d8d8d] mt-1.5">Weight: {d.weight}%</div>
@@ -231,7 +231,7 @@ export default function DashboardPage() {
       {/* Footer */}
       <footer className="border-t border-[#262626] mt-24">
         <div className="max-w-[1400px] mx-auto px-8 py-6 flex items-center justify-between">
-          <span className="text-xs text-[#8d8d8d]">QUORUM — Multi-Agent Architecture Tribunal</span>
+          <span className="text-xs text-[#8d8d8d]">QUORUM - Multi-Agent Architecture Tribunal</span>
           <span className="text-xs text-[#c6c6c6] font-mono tracking-wider">Powered by <span style={{ color: "#0f62fe" }}>IBM Bob</span></span>
         </div>
       </footer>

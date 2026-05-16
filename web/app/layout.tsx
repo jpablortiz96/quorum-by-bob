@@ -1,8 +1,8 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: “QUORUM - Multi-Agent Architecture Tribunal”,
+  title: "QUORUM - Multi-Agent Architecture Tribunal",
   description: "Stop making architecture decisions alone. Multi-agent tribunal for technical governance. Built on IBM Bob.",
 };
 
