@@ -12,6 +12,7 @@ import { module_economics, ModuleEconomicsInputSchema } from "./tools/module_eco
 import { cite_evidence, CiteEvidenceInputSchema } from "./tools/cite_evidence.js";
 import { score_dimension, ScoreDimensionInputSchema } from "./tools/score_dimension.js";
 import { scan_decisions, ScanDecisionsInputSchema } from "./tools/scan_decisions.js";
+import { time_machine, TimeMachineInputSchema } from "./tools/time_machine.js";
 
 const TOOLS: Tool[] = [
   {
@@ -157,6 +158,24 @@ const TOOLS: Tool[] = [
       required: [],
     },
   },
+  {
+    name: "time_machine",
+    description: "Travel back to a specific commit and capture the repository state JUST BEFORE that commit was applied. Returns a snapshot: services present, LOC, test file count, and modules — showing what the architecture looked like before the change. Proves Quorum can predict: run it on any historical commit to see what the council would have said.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        target_commit: {
+          type: "string",
+          description: "The commit hash to inspect (full or short). The tool captures state at parent~1 — the moment BEFORE this commit.",
+        },
+        repo_path: {
+          type: "string",
+          description: "Absolute path to the git repository. Defaults to demo-repo/galaxium-travels",
+        },
+      },
+      required: ["target_commit"],
+    },
+  },
 ];
 
 const server = new Server(
@@ -210,6 +229,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case "scan_decisions": {
         const parsed = ScanDecisionsInputSchema.parse(args);
         result = await scan_decisions(parsed);
+        break;
+      }
+      case "time_machine": {
+        const parsed = TimeMachineInputSchema.parse(args);
+        result = await time_machine(parsed);
         break;
       }
       default:

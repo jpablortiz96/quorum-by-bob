@@ -10,7 +10,8 @@
         "module_economics",
         "cite_evidence",
         "score_dimension",
-        "scan_decisions"
+        "scan_decisions",
+        "time_machine"
       ]
     }
   }
