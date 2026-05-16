@@ -1,22 +1,22 @@
 {
   "session_id": "quorum-2026-001",
   "created_at": "2026-05-15T21:55:09.440Z",
-  "updated_at": "2026-05-15T22:39:10.844Z",
+  "updated_at": "2026-05-16T01:44:40.542Z",
   "scores": {
     "evidence_strength": [
       {
         "agent": "judge",
-        "value": 70,
-        "rationale": "Conservative cited booking.py:7-54, commit aba26aa, dependency_blast_radius; Reformer cited commit 8f7ad7f, module_economics; Economist cited module_economics; Risk Officer cited dependency_blast_radius for server.py and booking.py; Engineer cited booking.py:7-54, server.py:100+, models.py:22-28, schemas.py:24-32; Historian missing",
-        "timestamp": "2026-05-15T22:38:41.250Z"
+        "value": 82,
+        "rationale": "All 6 agents cited specific evidence: 15 commit hashes with dates, 8 file:line references, 3 MCP tool outputs. Conservative and Historian provided strongest citations.",
+        "timestamp": "2026-05-16T01:44:15.187Z"
       }
     ],
     "historical_precedent": [
       {
         "agent": "judge",
-        "value": 40,
-        "rationale": "Historian report missing; only Reformer cited commit 8f7ad7f (2026-04-16) and Conservative cited commit aba26aa (2026-04-10) showing 13-day lifecycle, insufficient git archaeology",
-        "timestamp": "2026-05-15T22:38:48.724Z"
+        "value": 85,
+        "rationale": "Historian provided 5 commits across 13-day lifecycle (aba26aa to 59f9b46) showing introduction→failure→workaround→renaming→abandonment pattern per git_archaeology output",
+        "timestamp": "2026-05-16T01:44:25.394Z"
       }
     ],
     "economic_viability": [
@@ -46,12 +46,12 @@
     "council_consensus": [
       {
         "agent": "judge",
-        "value": 67,
-        "rationale": "4 agents favor consolidation (Reformer, Economist deferred, Risk Officer, Engineer with caveats); 1 opposes (Conservative defended separation); Historian absent; 4-1 split = 67/100",
-        "timestamp": "2026-05-15T22:39:10.844Z"
+        "value": 83,
+        "rationale": "5 of 6 agents favor consolidation (Reformer, Historian 85/100, Economist deferred but no opposition, Risk Officer, Engineer with caveats); only Conservative opposes; 5-1 alignment = 83/100",
+        "timestamp": "2026-05-16T01:44:40.542Z"
       }
     ]
   },
-  "computed_dcs": 58.2,
-  "verdict": "DEFER"
+  "computed_dcs": 69,
+  "verdict": "PROCEED WITH CONDITIONS"
 }
