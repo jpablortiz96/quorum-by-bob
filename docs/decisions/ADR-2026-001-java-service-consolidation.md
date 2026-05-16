@@ -85,12 +85,64 @@ The current Python implementation in [`booking_system_backend/services/booking.p
 14. `dependency_blast_radius("server.py")` → criticality 99/100 (minimal blast radius)
 15. `module_economics("booking_system_backend")` → 0 commits/90 days, $400/year maintenance, $2,160 consolidation cost, 64.8-month break-even, -44.4% 3-year ROI
 
+## Round 2: Cross-Examination Summary
+
+The Council conducted targeted cross-examinations between paired opponents. Only 4 of 6 agents produced Round 2 rebuttals; The Historian and Risk Officer did not respond to challenges.
+
+| Confrontation | Challenger | Defender | Outcome |
+|---------------|-----------|----------|---------|
+| Status Quo vs Change | Reformer | Conservative | **Reformer prevails**. Reformer cited `commit 10d8576` (2026-04-13) proving hold workflow WAS integrated into Python backend, directly contradicting Conservative's claim that capability was "abandoned." Conservative's rebuttal about "zero commits" metric being misleading does not address this core evidence. |
+| Status Quo vs Change | Conservative | Reformer | **Conservative weakens Reformer's position**. Conservative cited `commit 4156ec0` (2026-04-23) and `commit 48b0bb4` (2026-04-28) showing continued feature development in consolidated codebase, proving "zero maintenance burden" claim was premature. However, this does not salvage Conservative's primary argument. |
+| Precedent vs Feasibility | Engineer | Historian | **Historian holds ground**. Engineer argued Java service failed due to "lack of testing infrastructure" (`commit 4156ec0` test files added post-consolidation), but this SUPPORTS Historian's position that organizational dysfunction—not architectural soundness—caused the 13-day failure. Engineer's evidence strengthens rather than weakens Historian's case. |
+| Precedent vs Feasibility | Historian | Engineer | **No rebuttal filed**. Historian did not respond to Engineer's challenge. |
+| Cost vs Risk | Economist | Risk Officer | **Economist prevails decisively**. Economist proved via `git_archaeology` that ZERO `.java` files exist in repository, meaning Risk Officer's "cross-service communication failures eliminated" argument quantifies phantom risks. The Java service was never deployed; there is no network boundary to eliminate. |
+| Cost vs Risk | Risk Officer | Economist | **No rebuttal filed**. Risk Officer did not respond to Economist's challenge. |
+
+### Impact on Decision Confidence Score
+
+The cross-examination produced three significant evidence shifts:
+
+1. **Evidence Strength: 82 → 88** (+6 points)
+   - Reformer's `commit 10d8576` citation proves hold workflow integration, eliminating Conservative's "abandoned capability" argument
+   - Economist's "zero .java files" finding exposes Risk Officer's phantom risk quantification
+   - Net effect: Stronger evidence base for consolidation
+
+2. **Historical Precedent: 85 → 90** (+5 points)
+   - Engineer's testing infrastructure evidence (`commit 4156ec0`) reinforces Historian's organizational dysfunction narrative
+   - No counter-evidence weakened Historian's 13-day failure timeline
+
+3. **Economic Viability: 35 → 30** (-5 points)
+   - Conservative's evidence of continued development (`commit 4156ec0`, `commit 48b0bb4`) proves "zero maintenance burden" was premature
+   - Economist's position that economic case is "indeterminate" strengthened by lack of actual dual-service costs to avoid
+
+4. **Council Consensus: 83 → 75** (-8 points)
+   - Conservative maintained opposition despite contradictory evidence
+   - Economist maintained DEFER stance, refusing to support consolidation without quantified savings
+   - Two agents (Historian, Risk Officer) failed to defend positions in Round 2
+
+### Revised Decision Confidence Score
+
+| Dimension | Round 1 Score | Round 2 Score | Weight | Contribution |
+|-----------|---------------|---------------|--------|--------------|
+| Evidence Strength | 82/100 | **88/100** | 20% | 17.6 |
+| Historical Precedent | 85/100 | **90/100** | 15% | 13.5 |
+| Economic Viability | 35/100 | **30/100** | 20% | 6.0 |
+| Risk Assessment | 85/100 | 85/100 | 20% | 17.0 |
+| Technical Feasibility | 50/100 | 50/100 | 15% | 7.5 |
+| Council Consensus | 83/100 | **75/100** | 10% | 7.5 |
+| **TOTAL** | **69.0/100** | **69.1/100** | 100% | 69.1 |
+
+**Verdict remains: PROCEED WITH CONDITIONS** (threshold: 60-79)
+
+The cross-examination strengthened the historical and evidentiary case for consolidation while exposing weaknesses in the economic justification. The 0.1-point increase reflects improved evidence quality offset by reduced consensus. The binding conditions remain necessary—the consolidation is technically and historically justified, but economically unproven without quantified dual-service cost avoidance.
+
 ## Council Session Metadata
 
 - **Session ID:** quorum-2026-001
 - **Date:** 2026-05-16
 - **Repository:** demo-repo/galaxium-travels
-- **Agents Participating:** 6 of 6
-- **Total Evidence Citations:** 15 (5 commit hashes, 8 file:line references, 2 MCP tool outputs)
-- **Protocol:** Quorum Council Round 1 (full participation)
+- **Agents Participating:** 6 of 6 (Round 1), 4 of 6 (Round 2)
+- **Total Evidence Citations:** 18 (7 commit hashes, 8 file:line references, 2 MCP tool outputs, 1 repository structure finding)
+- **Protocol:** Quorum Council 3-Round Protocol (Round 1 complete, Round 2 partial, Round 3 synthesis)
 - **Inadmissible Evidence:** None (all agents cited specific sources)
+- **Round 2 Non-Participation:** The Historian and The Risk Officer did not file rebuttals

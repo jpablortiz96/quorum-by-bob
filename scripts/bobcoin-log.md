@@ -23,7 +23,9 @@ Update this log after every Bob IDE session. Actual cost comes from the Bob IDE 
 | 2026-05-15 | *— No sessions yet —* | — | — | — | Setup was done without Bob (free) |
 | 2026-05-15 | /init on Quorum workspace | Code | 1.0 | [2.24] | Generated enriched AGENTS.md + mode-specific context files in .bob/ |
 | 2026-05-15 | /init on Galaxium Travels (demo repo context) | Code | 1.0 | [1.10] | Enriched context for Council debates on demo case study |
-
+| 2026-05-15 | Council #1 v1 (3/6 agents — draft) | Orchestrator | 4.0 | 4.90 | Partial council. Preserved as ADR-001-draft. |
+| 2026-05-15 | Council #1 v2 (6/6 agents — FINAL) | Orchestrator | 4.0 | [5.55] | Full council. ADR-001 final. |
+| 2026-05-15 | Historian re-run + Judge re-synth | Orchestrator | 1.5 | [0.58] | Final ADR-001 with 6/6 agents and real git evidence |
 ---
 
 ## Budget Allocation Plan
