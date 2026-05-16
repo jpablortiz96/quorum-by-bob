@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 export const dynamic = "force-dynamic";
 
@@ -15,22 +15,22 @@ import type { AgentSlug, AgentStatus, CouncilData, AgentReport, Citation } from 
 type DebateState = "idle" | "simulating" | "done";
 
 const AGENT_STANCES: Record<AgentSlug, string> = {
-  conservative: "OPPOSE — Java separation was architecturally sound",
-  reformer: "SUPPORT — Zero maintenance burden post-consolidation ($400/year)",
-  historian: "SUPPORT — 5-commit timeline shows introduction→failure→abandonment",
-  economist: "DEFER — Cannot calculate avoided dual-service cost; -44.4% ROI",
-  "risk-officer": "SUPPORT — Consolidation eliminated cross-service communication failures",
-  engineer: "SUPPORT WITH CAVEATS — Python capable but missing hold mechanism",
-  judge: "VERDICT: PROCEED WITH CONDITIONS — DCS 69.0/100",
+  conservative: "OPPOSE â€” Java separation was architecturally sound",
+  reformer: "SUPPORT â€” Zero maintenance burden post-consolidation ($400/year)",
+  historian: "SUPPORT â€” 5-commit timeline shows introductionâ†’failureâ†’abandonment",
+  economist: "DEFER â€” Cannot calculate avoided dual-service cost; -44.4% ROI",
+  "risk-officer": "SUPPORT â€” Consolidation eliminated cross-service communication failures",
+  engineer: "SUPPORT WITH CAVEATS â€” Python capable but missing hold mechanism",
+  judge: "VERDICT: PROCEED WITH CONDITIONS â€” DCS 69.0/100",
 };
 
 const AGENT_SUMMARIES: Record<AgentSlug, string> = {
-  conservative: "No evidence found for inventory hold domain logic in current codebase. The booking service handles immediate seat decrements without hold/quote workflows, suggesting the Java service addressed a missing capability. Java's strong typing and enterprise transaction patterns suit inventory hold state machines better than Python's dynamic typing. A separate Java service would have isolated hold logic from the 8 MED-criticality consumers — a textbook microservice boundary. The consolidation after 13 days suggests implementation issues, not architectural flaws.",
+  conservative: "No evidence found for inventory hold domain logic in current codebase. The booking service handles immediate seat decrements without hold/quote workflows, suggesting the Java service addressed a missing capability. Java's strong typing and enterprise transaction patterns suit inventory hold state machines better than Python's dynamic typing. A separate Java service would have isolated hold logic from the 8 MED-criticality consumers â€” a textbook microservice boundary. The consolidation after 13 days suggests implementation issues, not architectural flaws.",
   reformer: "The Java inventory_hold_service was never deployed to production. It exists only as merged code (PR #9, April 16, 2026) with no directory presence in the repository. Zero maintenance burden post-consolidation at $400/year with no documented integration benefits from dual-language architecture. The Python backend is already handling all booking workflows with no service interruptions since consolidation.",
-  historian: "5-commit timeline: aba26aa (Apr 10) service introduced but immediately non-functional; 10d8576 (Apr 13) Python modified to bridge Java service — workaround architecture; 8f7ad7f (Apr 16) merged despite integration issues; 59f9b46 (Apr 20) directory renamed — namespace collision or organizational regret; 4156ec0 (Apr 23) subsequent development bypasses Java service entirely. Lifecycle: 13 days. Vocabulary: 'not visible', 'integrate', 'renaming' — language of failure and remediation.",
-  economist: "Java service directory does not exist in repository — never deployed to production. Python Service Annual Maintenance: $400/year (5 hours). Consolidation Cost: $2,160 (27 hours). Break-Even Time: 64.8 months. 3-Year ROI: -44.4%. The weak ROI stems from inability to calculate the avoided dual-service cost. Economic verdict: DEFER — insufficient data for confident ROI calculation, but status quo ($400/year Python-only) is economically stable.",
-  "risk-officer": "Consolidation eliminated: (1) cross-service HTTP communication failures between Python and Java layers, (2) deployment coordination complexity across two runtimes, (3) dual-stack maintenance burden on a solo contributor. Current risk: booking.py has 10 consumers with criticality score 58/100 — any modification to the hold implementation has broad blast radius. Residual risk: missing hold mechanism means frontend cannot display hold states, creating a UX debt that will require Python-side implementation.",
-  engineer: "Python/FastAPI is technically capable of implementing inventory hold workflows. However: booking_system_backend/services/booking.py:7-54 currently handles immediate seat decrements only — no hold/quote/expiry state machine. models.py:22-28 Booking model lacks hold_expiry or quote_id fields. schemas.py:24-32 BookingOut schema contains only final booking states. The consolidation is architecturally correct but technically incomplete — the Python service must implement what the Java service was designed to provide before this ADR can be considered fully executed.",
+  historian: "5-commit timeline: aba26aa (Apr 10) service introduced but immediately non-functional; 10d8576 (Apr 13) Python modified to bridge Java service â€” workaround architecture; 8f7ad7f (Apr 16) merged despite integration issues; 59f9b46 (Apr 20) directory renamed â€” namespace collision or organizational regret; 4156ec0 (Apr 23) subsequent development bypasses Java service entirely. Lifecycle: 13 days. Vocabulary: 'not visible', 'integrate', 'renaming' â€” language of failure and remediation.",
+  economist: "Java service directory does not exist in repository â€” never deployed to production. Python Service Annual Maintenance: $400/year (5 hours). Consolidation Cost: $2,160 (27 hours). Break-Even Time: 64.8 months. 3-Year ROI: -44.4%. The weak ROI stems from inability to calculate the avoided dual-service cost. Economic verdict: DEFER â€” insufficient data for confident ROI calculation, but status quo ($400/year Python-only) is economically stable.",
+  "risk-officer": "Consolidation eliminated: (1) cross-service HTTP communication failures between Python and Java layers, (2) deployment coordination complexity across two runtimes, (3) dual-stack maintenance burden on a solo contributor. Current risk: booking.py has 10 consumers with criticality score 58/100 â€” any modification to the hold implementation has broad blast radius. Residual risk: missing hold mechanism means frontend cannot display hold states, creating a UX debt that will require Python-side implementation.",
+  engineer: "Python/FastAPI is technically capable of implementing inventory hold workflows. However: booking_system_backend/services/booking.py:7-54 currently handles immediate seat decrements only â€” no hold/quote/expiry state machine. models.py:22-28 Booking model lacks hold_expiry or quote_id fields. schemas.py:24-32 BookingOut schema contains only final booking states. The consolidation is architecturally correct but technically incomplete â€” the Python service must implement what the Java service was designed to provide before this ADR can be considered fully executed.",
   judge: "The Council accepts consolidation of inventory hold functionality into the Python backend, conditional upon implementing the missing hold/quote workflow capabilities. The 13-day lifecycle of the Java service demonstrates architectural friction that outweighs theoretical benefits of domain boundary isolation. However, consolidation must not be treated as complete until the Python service implements proper inventory hold mechanisms with expiry timers and quote generation. Decision Confidence Score: 69.0/100. Verdict: PROCEED WITH CONDITIONS.",
 };
 
@@ -168,32 +168,32 @@ export default function CouncilPage() {
   const nonJudgeAgents = AGENTS.filter((a) => a.slug !== "judge");
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-[#161616]">
       {/* Header */}
-      <div className="border-b border-[#1f1f1f] bg-[#0a0a0a]/90 backdrop-blur-sm sticky top-0 z-20">
+      <div className="border-b border-[#262626] bg-[#161616]/90 backdrop-blur-sm sticky top-0 z-20">
         <div className="max-w-[1400px] mx-auto px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.push("/")}
-              className="flex items-center gap-2 text-[#737373] hover:text-[#fafafa] transition-colors text-sm"
+              className="flex items-center gap-2 text-[#8d8d8d] hover:text-[#f4f4f4] transition-colors text-sm"
             >
               <ArrowLeft className="w-4 h-4" />
               Dashboard
             </button>
             <span className="text-[#262626]">|</span>
-            <span className="font-bold tracking-wider text-[#fafafa]">⚖️ Council Chamber</span>
+            <span className="font-bold tracking-wider text-[#f4f4f4]">âš–ï¸ Council Chamber</span>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMuted(!muted)}
-              className="p-2 rounded-lg border border-[#262626] text-[#737373] hover:text-[#fafafa] transition-colors"
+              className="p-2 rounded-lg border border-[#262626] text-[#8d8d8d] hover:text-[#f4f4f4] transition-colors"
             >
               {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
             </button>
             {debateState !== "idle" && (
               <button
                 onClick={reset}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#262626] text-[#737373] hover:text-[#fafafa] text-xs transition-colors"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#262626] text-[#8d8d8d] hover:text-[#f4f4f4] text-xs transition-colors"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 Reset
@@ -207,30 +207,30 @@ export default function CouncilPage() {
         {/* Main content */}
         <div className="flex-1 min-w-0 space-y-8">
           {/* Decision question */}
-          <div className="rounded-xl border border-[#262626] bg-[#141414] p-6">
-            <div className="text-xs font-medium uppercase tracking-widest text-[#737373] mb-3">
+          <div className="rounded-xl border border-[#262626] bg-[#262626] p-6">
+            <div className="text-xs font-medium uppercase tracking-widest text-[#8d8d8d] mb-3">
               Decision Under Review
             </div>
-            <h1 className="text-2xl font-bold text-[#fafafa] mb-2">
+            <h1 className="text-2xl font-bold text-[#f4f4f4] mb-2">
               Should we consolidate the{" "}
               <span className="font-mono text-[#d4af37]">inventory_hold_service</span>?
             </h1>
-            <p className="text-sm text-[#a3a3a3]">
+            <p className="text-sm text-[#c6c6c6]">
               The Java inventory_hold_service was introduced on April 10, 2026 and abandoned 13 days later.
               Should the functionality be consolidated into the Python backend?
             </p>
             <div className="flex flex-wrap gap-2 mt-4">
-              {["Galaxium Travels", "Backend Architecture", "Java ↔ Python", "Microservices"].map((tag) => (
-                <span key={tag} className="text-[10px] px-2 py-1 rounded-full bg-[#1f1f1f] text-[#737373] font-mono">
+              {["Galaxium Travels", "Backend Architecture", "Java â†” Python", "Microservices"].map((tag) => (
+                <span key={tag} className="text-[10px] px-2 py-1 rounded-full bg-[#262626] text-[#8d8d8d] font-mono">
                   {tag}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Agent grid — 6 in 3x2 */}
+          {/* Agent grid â€” 6 in 3x2 */}
           <div>
-            <div className="text-xs font-medium uppercase tracking-widest text-[#737373] mb-4">
+            <div className="text-xs font-medium uppercase tracking-widest text-[#8d8d8d] mb-4">
               Council Members
             </div>
             <motion.div
@@ -252,11 +252,11 @@ export default function CouncilPage() {
             </motion.div>
           </div>
 
-          {/* The Judge — full width, larger */}
+          {/* The Judge â€” full width, larger */}
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="text-xs font-medium uppercase tracking-widest text-[#d4af37]">
-                ⚖️ The Judge — Final Verdict
+                âš–ï¸ The Judge â€” Final Verdict
               </span>
               <div className="flex-1 h-px bg-[#d4af3730]" />
             </div>
@@ -281,9 +281,9 @@ export default function CouncilPage() {
               <button
                 onClick={startDebate}
                 className="flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-base transition-all hover:opacity-90 active:scale-95"
-                style={{ backgroundColor: "#d4af37", color: "#0a0a0a" }}
+                style={{ backgroundColor: "#d4af37", color: "#161616" }}
               >
-                🏛️ Start Council Debate
+                ðŸ›ï¸ Start Council Debate
               </button>
             </motion.div>
           )}
@@ -291,7 +291,7 @@ export default function CouncilPage() {
           {/* Simulating indicator */}
           {debateState === "simulating" && (
             <div className="flex justify-center">
-              <div className="flex items-center gap-2 text-xs text-[#737373]">
+              <div className="flex items-center gap-2 text-xs text-[#8d8d8d]">
                 <motion.div
                   className="w-2 h-2 rounded-full bg-[#d4af37]"
                   animate={{ opacity: [1, 0.2, 1] }}
@@ -327,29 +327,29 @@ export default function CouncilPage() {
                     >
                       <div className="h-px bg-[#262626]" />
                       <div className="text-center space-y-1">
-                        <div className="text-sm font-semibold text-[#fafafa]">ADR-2026-001 Generated</div>
-                        <div className="text-xs text-[#737373]">Java Service Consolidation — Accepted with Conditions</div>
+                        <div className="text-sm font-semibold text-[#f4f4f4]">ADR-2026-001 Generated</div>
+                        <div className="text-xs text-[#8d8d8d]">Java Service Consolidation â€” Accepted with Conditions</div>
                       </div>
                       <div className="flex justify-center gap-3 pt-2">
                         <a
                           href="/api/download/ADR-2026-001"
                           download
                           className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all hover:opacity-90"
-                          style={{ backgroundColor: "#d4af37", color: "#0a0a0a" }}
+                          style={{ backgroundColor: "#d4af37", color: "#161616" }}
                         >
                           <Download className="w-4 h-4" />
                           Download ADR
                         </a>
                         <button
                           onClick={reset}
-                          className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm border border-[#262626] text-[#a3a3a3] hover:text-[#fafafa] hover:border-[#404040] transition-all"
+                          className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm border border-[#262626] text-[#c6c6c6] hover:text-[#f4f4f4] hover:border-[#404040] transition-all"
                         >
                           <RotateCcw className="w-4 h-4" />
                           Run Another Council
                         </button>
                         <button
                           onClick={() => router.push("/")}
-                          className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm border border-[#262626] text-[#a3a3a3] hover:text-[#fafafa] hover:border-[#404040] transition-all"
+                          className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm border border-[#262626] text-[#c6c6c6] hover:text-[#f4f4f4] hover:border-[#404040] transition-all"
                         >
                           <ArrowLeft className="w-4 h-4" />
                           Back to Dashboard

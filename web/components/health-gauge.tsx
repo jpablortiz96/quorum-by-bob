@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -10,9 +10,9 @@ interface HealthGaugeProps {
 }
 
 function getColor(score: number): string {
-  if (score >= 70) return "#10b981";
-  if (score >= 50) return "#f59e0b";
-  return "#ef4444";
+  if (score >= 70) return "#42be65"; // Carbon green-50
+  if (score >= 50) return "#f1c21b"; // Carbon yellow-30
+  return "#fa4d56";                  // Carbon red-50
 }
 
 export function HealthGauge({ score, size = 180, label = "Health Score" }: HealthGaugeProps) {
@@ -65,10 +65,10 @@ export function HealthGauge({ score, size = 180, label = "Health Score" }: Healt
           >
             {Math.round(displayed)}
           </motion.span>
-          <span className="text-xs text-[#737373] mt-0.5">/ 100</span>
+          <span className="text-xs text-[#8d8d8d] mt-0.5">/ 100</span>
         </div>
       </div>
-      <span className="text-xs font-medium text-[#a3a3a3] uppercase tracking-widest">{label}</span>
+      <span className="text-xs font-medium text-[#c6c6c6] uppercase tracking-widest">{label}</span>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   Radar,
@@ -31,13 +31,13 @@ export function HealthRadar({ dimensions }: HealthRadarProps) {
         <PolarGrid stroke="#262626" />
         <PolarAngleAxis
           dataKey="subject"
-          tick={{ fill: "#a3a3a3", fontSize: 11 }}
+          tick={{ fill: "#c6c6c6", fontSize: 11 }}
         />
         <Radar
           name="Score"
           dataKey="value"
-          stroke="#d4af37"
-          fill="#d4af37"
+          stroke="#0f62fe"
+          fill="#0f62fe"
           fillOpacity={0.15}
           strokeWidth={1.5}
         />

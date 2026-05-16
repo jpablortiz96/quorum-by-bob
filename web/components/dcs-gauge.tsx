@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -10,10 +10,10 @@ interface DCSGaugeProps {
 }
 
 function getColor(score: number): string {
-  if (score >= 80) return "#10b981";
-  if (score >= 60) return "#f59e0b";
-  if (score >= 40) return "#ef4444";
-  return "#737373";
+  if (score >= 80) return "#42be65"; // Carbon green-50
+  if (score >= 60) return "#f1c21b"; // Carbon yellow-30
+  if (score >= 40) return "#fa4d56"; // Carbon red-50
+  return "#8d8d8d";                  // gray-50
 }
 
 function getVerdict(score: number): string {
@@ -51,7 +51,7 @@ export function DCSGauge({ target, animate = false, size = 240 }: DCSGaugeProps)
           <path
             d={`M 12 ${size / 2} A ${radius} ${radius} 0 0 1 ${size - 12} ${size / 2}`}
             fill="none"
-            stroke="#1f1f1f"
+            stroke="#262626"
             strokeWidth="16"
             strokeLinecap="round"
           />
@@ -69,7 +69,7 @@ export function DCSGauge({ target, animate = false, size = 240 }: DCSGaugeProps)
           <span className="font-bold tabular-nums" style={{ color, fontSize: size * 0.22 }}>
             {animate ? current.toFixed(1) : target.toFixed(1)}
           </span>
-          <span className="text-sm text-[#737373]">/ 100 DCS</span>
+          <span className="text-sm text-[#8d8d8d]">/ 100 DCS</span>
         </div>
       </div>
       <div

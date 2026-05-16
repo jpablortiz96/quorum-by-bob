@@ -9,7 +9,8 @@
         "dependency_blast_radius",
         "module_economics",
         "cite_evidence",
-        "score_dimension"
+        "score_dimension",
+        "scan_decisions"
       ]
     }
   }

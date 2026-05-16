@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { AgentAvatar } from "./agent-avatar";
@@ -45,7 +45,7 @@ export function AgentPanel({
         status === "done" && "opacity-60",
       )}
       style={{
-        backgroundColor: isActive ? `${color}08` : "#141414",
+        backgroundColor: isActive ? `${color}08` : "#262626",
         borderColor: isActive ? `${color}60` : "#262626",
         boxShadow: isActive ? `0 0 20px ${color}25` : "none",
       }}
@@ -57,10 +57,10 @@ export function AgentPanel({
         <AgentAvatar slug={slug} status={status} size={isJudge ? 52 : 40} />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-sm text-[#fafafa] truncate">{agent.name}</span>
+            <span className="font-semibold text-sm text-[#f4f4f4] truncate">{agent.name}</span>
             <StatusBadge status={status} color={color} />
           </div>
-          <span className="text-xs text-[#737373]">{agent.role}</span>
+          <span className="text-xs text-[#8d8d8d]">{agent.role}</span>
           {stance && status !== "idle" && (
             <div
               className="mt-1 text-xs px-2 py-0.5 rounded inline-block font-mono truncate max-w-full"
@@ -78,7 +78,7 @@ export function AgentPanel({
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            className="text-xs text-[#a3a3a3] leading-relaxed overflow-hidden"
+            className="text-xs text-[#c6c6c6] leading-relaxed overflow-hidden"
             style={{ maxHeight: isJudge ? "none" : "120px" }}
           >
             <TypewriterText text={typedContent || content} isTyping={status === "speaking"} />
@@ -88,7 +88,7 @@ export function AgentPanel({
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center gap-2 text-xs text-[#737373]"
+            className="flex items-center gap-2 text-xs text-[#8d8d8d]"
           >
             <ThinkingDots color={color} />
             <span>{STATUS_LABELS.thinking}</span>
@@ -101,10 +101,10 @@ export function AgentPanel({
 
 function StatusBadge({ status, color }: { status: AgentStatus; color: string }) {
   const styles: Record<AgentStatus, string> = {
-    idle: "bg-[#1f1f1f] text-[#737373]",
+    idle: "bg-[#262626] text-[#8d8d8d]",
     thinking: "text-white",
     speaking: "text-white",
-    done: "bg-[#1f1f1f] text-[#737373]",
+    done: "bg-[#262626] text-[#8d8d8d]",
   };
   return (
     <span

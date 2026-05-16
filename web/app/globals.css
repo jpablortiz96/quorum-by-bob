@@ -1,13 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
-  --elevated: #141414;
-  --border: #262626;
+  /* IBM Carbon palette */
+  --ibm-blue-60:  #0f62fe;
+  --ibm-blue-70:  #0043ce;
+  --ibm-blue-80:  #002d9c;
+  --ibm-blue-90:  #001d6c;
+  --ibm-blue-40:  #78a9ff;
+  --gray-100:     #161616;
+  --gray-90:      #262626;
+  --gray-80:      #393939;
+  --gray-70:      #525252;
+  --gray-50:      #8d8d8d;
+  --gray-30:      #c6c6c6;
+  --gray-10:      #f4f4f4;
+  --support-error:   #fa4d56;
+  --support-warning: #f1c21b;
+  --support-success: #42be65;
 }
 
 * {
@@ -17,14 +30,14 @@
 }
 
 html {
-  background-color: #0a0a0a;
-  color: #fafafa;
+  background-color: var(--gray-100);
+  color: var(--gray-10);
 }
 
 body {
-  background-color: #0a0a0a;
-  color: #fafafa;
-  font-family: 'Inter', sans-serif;
+  background-color: var(--gray-100);
+  color: var(--gray-10);
+  font-family: 'IBM Plex Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
@@ -34,16 +47,22 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--gray-100);
 }
 ::-webkit-scrollbar-thumb {
-  background: #262626;
-  border-radius: 3px;
+  background: var(--gray-80);
+  border-radius: 0;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #404040;
+  background: var(--gray-70);
 }
 
 .font-mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Carbon focus ring style */
+*:focus-visible {
+  outline: 2px solid var(--ibm-blue-60);
+  outline-offset: 2px;
 }
