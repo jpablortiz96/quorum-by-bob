@@ -145,6 +145,33 @@ Every Quorum verdict includes a DCS — a weighted aggregate of 6 dimensions, ea
 
 ---
 
+## Live Dashboard
+
+The Quorum web dashboard visualizes repository health, council debates, and ADR history.
+
+```
+cd web && npm install && npm run dev
+```
+
+Open **http://localhost:3000**
+
+**Vista A — Architectural Health Dashboard**
+- QUORUM Health Score gauge (34/100 for Galaxium Travels)
+- 4-dimension radar chart (Decision Quality, Tribal Knowledge Risk, Reverted Decisions, Tribunal Coverage)
+- ADR list with DCS bars and markdown preview/download
+- DCS breakdown across all 6 council dimensions
+
+**Vista B — Live Council Debate**
+- 7 agent panels with typewriter argument presentation
+- Sequential debate animation: Conservative → Reformer → Historian → Economist → Risk Officer → Engineer → Judge
+- The Judge activates with dramatic pause + gavel sound
+- DCS gauge animates 0 → 69.0 at verdict
+- Download ADR button serves the markdown file
+
+See [web/README.md](web/README.md) for full documentation.
+
+---
+
 ## Demo
 
 Target repository: [IBM/galaxium-travels](https://github.com/IBM/galaxium-travels) (branch: `bob-learning-path-branch`)
@@ -185,4 +212,4 @@ MIT — see [LICENSE](LICENSE)
 
 IBM Bob Hackathon — May 2026
 
-**Stack:** TypeScript · Node.js 20 · Model Context Protocol · Next.js 15 · simple-git
+**Stack:** TypeScript · Node.js 20+ · Model Context Protocol · Next.js 14.2 · simple-git · Framer Motion · Recharts
