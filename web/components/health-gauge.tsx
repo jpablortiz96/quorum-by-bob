@@ -29,8 +29,15 @@ export function HealthGauge({ score, size = 180, label = "Health Score" }: Healt
     return () => clearTimeout(timer);
   }, [score]);
 
-  const radius = (size - 20) / 2;
-  const circumference = Math.PI * radius;
+  const strokeW = 14;
+  const r = (size - strokeW * 2) / 2;
+  const cx = size / 2;
+  const cy = size / 2;
+  const svgH = size / 2 + strokeW / 2 + 6;
+
+  // Counterclockwise sweep (0 0 0) draws arc going UP — correct for a gauge
+  const arcPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 0 ${cx + r} ${cy}`;
+  const circumference = Math.PI * r;
   const pct = displayed / 100;
   const strokeDashoffset = circumference * (1 - pct);
   const color = getColor(score);
@@ -38,19 +45,21 @@ export function HealthGauge({ score, size = 180, label = "Health Score" }: Healt
 
   return (
     <div className="flex flex-col items-center gap-0">
-      <svg width={size} height={size / 2 + 10} viewBox={`0 0 ${size} ${size / 2 + 10}`}>
+      <svg width={size} height={svgH} viewBox={`0 0 ${size} ${svgH}`}>
+        {/* Track arc */}
         <path
-          d={`M 10 ${size / 2} A ${radius} ${radius} 0 0 1 ${size - 10} ${size / 2}`}
+          d={arcPath}
           fill="none"
-          stroke="#262626"
-          strokeWidth="14"
+          stroke="#393939"
+          strokeWidth={strokeW}
           strokeLinecap="round"
         />
+        {/* Progress arc */}
         <motion.path
-          d={`M 10 ${size / 2} A ${radius} ${radius} 0 0 1 ${size - 10} ${size / 2}`}
+          d={arcPath}
           fill="none"
           stroke={color}
-          strokeWidth="14"
+          strokeWidth={strokeW}
           strokeLinecap="round"
           strokeDasharray={circumference}
           initial={{ strokeDashoffset: circumference }}
@@ -62,7 +71,7 @@ export function HealthGauge({ score, size = 180, label = "Health Score" }: Healt
       <div className="flex flex-col items-center -mt-1">
         <motion.span
           className="font-bold tabular-nums leading-none"
-          style={{ color, fontSize: Math.round(size * 0.32) }}
+          style={{ color, fontSize: Math.round(size * 0.28) }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}

@@ -33,6 +33,8 @@ function StatusChip({ status }: { status: string }) {
     "DO NOT PROCEED": { bg: "#fa4d5620", fg: "#fa4d56" },
     "SUPERSEDED": { bg: "#8d8d8d20", fg: "#8d8d8d" },
     "Accepted (Retrospective)": { bg: "#be95ff20", fg: "#be95ff" },
+    "Time Machine": { bg: "#42be6520", fg: "#42be65" },
+    "Unknown": { bg: "#8d8d8d20", fg: "#8d8d8d" },
   };
   const s = STATUS_MAP[status] ?? { bg: "#8d8d8d20", fg: "#8d8d8d" };
   return (
@@ -101,7 +103,14 @@ function ADRRow({ adr, onSelect }: { adr: ADR; onSelect: (a: ADR) => void }) {
         <span className="font-mono text-sm font-semibold text-[#78a9ff]">{adr.id}</span>
       </td>
       <td className="py-4 pr-4 max-w-xs">
-        <span className="text-sm font-medium text-[#f4f4f4]">{adr.title}</span>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-sm font-medium text-[#f4f4f4]">{adr.title}</span>
+          {adr.status === "Time Machine" && (
+            <span className="text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider whitespace-nowrap" style={{ color: "#42be65", backgroundColor: "#42be6520", border: "1px solid #42be6540" }}>
+              Time Machine
+            </span>
+          )}
+        </div>
       </td>
       <td className="py-4 pr-4">
         <StatusChip status={adr.status} />

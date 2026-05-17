@@ -5,9 +5,10 @@ export const dynamic = "force-dynamic";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight, GitCommit, FileText, RotateCcw, Shield } from "lucide-react";
+import { GitCommit, FileText, RotateCcw, Shield, ArrowRight, Clock } from "lucide-react";
+import { Nav } from "@/components/nav";
 import { HealthGauge } from "@/components/health-gauge";
-import { HealthRadar } from "@/components/health-radar";
+import { HealthDimensions } from "@/components/health-dimensions";
 import { ADRList } from "@/components/adr-list";
 import type { HealthData, ADR } from "@/types/quorum";
 
@@ -60,6 +61,33 @@ function StatCard({
   );
 }
 
+const CAPABILITIES = [
+  {
+    icon: "tribunal",
+    title: "7-Agent Tribunal",
+    description: "Conservative, Reformer, Historian, Economist, Risk Officer, Engineer, and Judge debate your architecture decision with adversarial stances, producing a Decision Confidence Score.",
+    href: "/council",
+    label: "Open Council",
+    color: "#0f62fe",
+  },
+  {
+    icon: "xam",
+    title: "Adversarial Cross-Examination",
+    description: "After Round 1, opposing agents confront each other's arguments in Round 2, forced to maintain, revise, or concede their positions. No consensus by committee.",
+    href: "/council",
+    label: "See Round 2",
+    color: "#be95ff",
+  },
+  {
+    icon: "timemachine",
+    title: "Time Machine",
+    description: "Predict what Quorum would have advised before a decision was made. Validated against the actual git commit record - every predicted concern confirmed or denied.",
+    href: "/time-machine",
+    label: "Run Analysis",
+    color: "#42be65",
+  },
+];
+
 export default function DashboardPage() {
   const router = useRouter();
   const [health, setHealth] = useState<HealthData | null>(null);
@@ -72,13 +100,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-[#161616]">
-      {/* Top nav */}
-      <div className="border-b border-[#262626] bg-[#161616]/90 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-[1400px] mx-auto px-8 py-4 flex items-center justify-between">
-          <span className="text-lg font-bold tracking-wider text-[#f4f4f4]">&#9878;&#65039; QUORUM</span>
-          <span className="text-sm text-[#8d8d8d] font-mono">Architectural Health Monitor</span>
-        </div>
-      </div>
+      <Nav />
 
       <div className="max-w-[1400px] mx-auto px-8 py-12 space-y-16">
         {/* Hero */}
@@ -108,8 +130,41 @@ export default function DashboardPage() {
           </motion.p>
         </motion.div>
 
+        {/* Capability Cards */}
+        <motion.div variants={FADE_UP} initial="hidden" animate="show" transition={{ delay: 0.2 }}>
+          <h2 className="text-2xl font-semibold text-[#f4f4f4] mb-6">Capabilities</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {CAPABILITIES.map((cap) => (
+              <div
+                key={cap.title}
+                className="rounded-xl border p-6 flex flex-col gap-4"
+                style={{ borderColor: `${cap.color}30`, backgroundColor: `${cap.color}06` }}
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold"
+                  style={{ backgroundColor: `${cap.color}20`, color: cap.color }}
+                >
+                  {cap.icon === "tribunal" ? "7" : cap.icon === "xam" ? "X" : <Clock className="w-5 h-5" />}
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-[#f4f4f4] mb-1.5">{cap.title}</h3>
+                  <p className="text-sm text-[#8d8d8d] leading-relaxed">{cap.description}</p>
+                </div>
+                <button
+                  onClick={() => router.push(cap.href)}
+                  className="flex items-center gap-1.5 text-sm font-semibold mt-auto transition-opacity hover:opacity-80"
+                  style={{ color: cap.color }}
+                >
+                  {cap.label}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Health Score */}
-        <motion.div variants={FADE_UP} initial="hidden" animate="show" transition={{ delay: 0.3 }}>
+        <motion.div variants={FADE_UP} initial="hidden" animate="show" transition={{ delay: 0.35 }}>
           <h2 className="text-2xl font-semibold text-[#f4f4f4] mb-2">Repository Health</h2>
           <p className="text-sm text-[#8d8d8d] mb-6">Galaxium Travels - live assessment</p>
           <div className="rounded-xl border border-[#393939] bg-[#262626] p-8">
@@ -145,7 +200,7 @@ export default function DashboardPage() {
                     label="Reverts"
                     value={health.stats.revertedPatterns}
                     accent="#fa4d56"
-                    context="Changes later undone - unstable decisions"
+                    context="Changes later undone"
                   />
                   <StatCard
                     icon={Shield}
@@ -164,15 +219,19 @@ export default function DashboardPage() {
                 </div>
               )}
 
-              {/* Radar chart */}
+              {/* Health Dimensions (replaces radar) */}
               <div>
-                <div className="text-sm font-semibold text-[#c6c6c6] mb-4 uppercase tracking-wider">
+                <div className="text-sm font-semibold text-[#c6c6c6] mb-5 uppercase tracking-wider">
                   Health Dimensions
                 </div>
                 {health ? (
-                  <HealthRadar dimensions={health.dimensions} />
+                  <HealthDimensions dimensions={health.dimensions} />
                 ) : (
-                  <div className="h-[300px] bg-[#393939] rounded-xl animate-pulse" />
+                  <div className="space-y-4">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="h-10 bg-[#393939] rounded-lg animate-pulse" />
+                    ))}
+                  </div>
                 )}
               </div>
             </div>
@@ -184,10 +243,10 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-2xl font-semibold text-[#f4f4f4]">Architecture Decision Records</h2>
-              <p className="text-sm text-[#8d8d8d] mt-1">Committed decisions produced by the Quorum Council</p>
+              <p className="text-sm text-[#8d8d8d] mt-1">Decisions produced by the Quorum Council</p>
             </div>
             <span className="text-sm font-mono text-[#8d8d8d] bg-[#262626] border border-[#393939] px-4 py-2 rounded-lg">
-              {adrs.filter((a) => a.status !== "SUPERSEDED").length} active ADR{adrs.filter((a) => a.status !== "SUPERSEDED").length !== 1 ? "s" : ""}
+              {adrs.filter((a) => a.status !== "SUPERSEDED").length} active
             </span>
           </div>
           <div className="rounded-xl border border-[#393939] bg-[#262626] p-6">
@@ -255,7 +314,6 @@ export default function DashboardPage() {
         </motion.div>
       </div>
 
-      {/* Footer */}
       <footer className="border-t border-[#262626] mt-24">
         <div className="max-w-[1400px] mx-auto px-8 py-6 flex items-center justify-between">
           <span className="text-sm text-[#8d8d8d]">QUORUM - Multi-Agent Architecture Tribunal</span>

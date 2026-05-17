@@ -23,19 +23,22 @@ export function getAllADRs(): ADR[] {
         const idMatch = filename.match(/^(ADR-[\d-]+)/);
         const id = idMatch ? idMatch[1] : filename.replace(".md", "");
 
-        const titleMatch = raw.match(/^#\s+ADR-[\d-]+:\s+(.+)$/m);
+        // Match titles with optional parenthetical: "# ADR-XXXX: Title" or "# ADR-XXXX (TAG): Title"
+        const titleMatch = raw.match(/^#\s+ADR-[\d-]+(?:\s+\([^)]+\))?:\s+(.+)$/m);
         let title = titleMatch ? titleMatch[1].trim() : id;
 
         const statusMatch = raw.match(/\*\*Status:\*\*\s+(.+)/);
-        let status = statusMatch ? statusMatch[1].trim() : "Unknown";
+        const analysisTypeMatch = raw.match(/\*\*Analysis Type:\*\*\s+(.+)/);
+        let status = statusMatch ? statusMatch[1].trim() : (analysisTypeMatch ? "Time Machine" : "Unknown");
 
         const dateMatch = raw.match(/\*\*Date:\*\*\s+(.+)/);
         const date = dateMatch ? dateMatch[1].trim() : "";
 
-        const dcsMatch = raw.match(/Decision Confidence Score[:\*]*\s+([\d.]+)/i);
+        const dcsMatch = raw.match(/Decision Confidence Score[:\*\s]*(\d+(?:\.\d+)?)\s*\/\s*100/i)
+          ?? raw.match(/Predicted DCS[:\*\s]*(\d+(?:\.\d+)?)\s*\/\s*100/i);
         const dcs = dcsMatch ? parseFloat(dcsMatch[1]) : 0;
 
-        // Mark draft / superseded files distinctly so the ADR list can separate them
+        // Mark draft / superseded files
         const isDraft = filename.includes("draft") || filename.includes("3agents");
         if (isDraft) {
           title = "Java Consolidation (Draft - 3-agent council)";
@@ -49,10 +52,9 @@ export function getAllADRs(): ADR[] {
     })
     .filter((a): a is ADR => a !== null)
     .sort((a, b) => {
-      // Non-draft first, then by id
-      const aSuperseded = a.status === "SUPERSEDED" ? 1 : 0;
-      const bSuperseded = b.status === "SUPERSEDED" ? 1 : 0;
-      if (aSuperseded !== bSuperseded) return aSuperseded - bSuperseded;
+      // Time Machine and non-SUPERSEDED first, then alphabetical
+      if (a.status === "SUPERSEDED" && b.status !== "SUPERSEDED") return 1;
+      if (a.status !== "SUPERSEDED" && b.status === "SUPERSEDED") return -1;
       return a.id.localeCompare(b.id);
     });
 }
