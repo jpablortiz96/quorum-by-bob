@@ -19,7 +19,7 @@
 [![MCP](https://img.shields.io/badge/MCP-7%20Tools-be95ff?style=flat-square)](mcp-server/src/tools/)
 [![IBM Bob Hackathon](https://img.shields.io/badge/IBM%20Bob%20Hackathon-May%202026-f1c21b?style=flat-square)](https://www.ibm.com/bob)
 
-<!-- DEMO GIF: insert council-debate.gif here -->
+![QUORUM Dashboard — Repository Health, Council Debate, Time Machine](docs/assets/dashboard.png)
 
 ---
 
@@ -88,6 +88,8 @@ This is not a retrospective summary. It is a reproducible proof that adversarial
 ---
 
 ## ⚙️ How It Works
+
+![quorum-tools MCP Server — 7 tools available to the Council during live debates](docs/assets/mcp-tools.png)
 
 ### Council Protocol
 
@@ -175,6 +177,8 @@ Every layer of QUORUM's architecture is a Bob extension mechanism working in con
 | **Rules Files** | `evidence-first.md` enforces the citation standard across all modes. Uncited claims are flagged inadmissible. |
 | **The Oracle Mode** | Proactive governance: The Oracle scans the full repository using `scan_decisions` and surfaces the architectural questions the team *should* be debating — before problems escalate. |
 
+![The 8 custom Bob modes — 7 Council agents + The Oracle, each with isolated MCP permissions](docs/assets/bob-modes.png)
+
 > **Bob doesn't just write code for QUORUM. Bob IS QUORUM's reasoning engine.**
 
 ---
@@ -191,17 +195,22 @@ cd web && npm install && npm run dev
 ### Dashboard
 Repository health at a glance: QUORUM Health Score gauge, 4-dimension health bars (Decision Quality, Tribal Knowledge Risk, Reverted Decisions, Tribunal Coverage), ADR list with DCS bars and inline markdown preview, and full Decision Confidence Score breakdown.
 
-<!-- SCREENSHOT: docs/assets/dashboard.png -->
+![QUORUM Dashboard — Repository Health Score, KPI cards, Health Dimensions, ADR list](docs/assets/dashboard.png)
 
 ### Council Chamber
 Watch the debate unfold in real time: 6 agents activate sequentially with typewriter arguments, Round 2 cross-examination cards reveal with VS layout, The Judge synthesizes and the DCS gauge animates to the final score. Skip-to-verdict for demos. Evidence sidebar shows live commit citations.
 
-<!-- SCREENSHOT: docs/assets/council-chamber.png -->
+![Council Chamber — 3-phase adversarial debate with Round 1, Round 2 cross-examination, and DCS verdict](docs/assets/council-chamber.png)
+
+### Verdict
+The Judge synthesizes all agent evidence and cross-examination results into the Decision Confidence Score. The gauge animates to the final score and the committable ADR is made available for download.
+
+![Verdict — DCS gauge animating to 69.0/100, PROCEED WITH CONDITIONS, ADR download](docs/assets/verdict.png)
 
 ### Time Machine
 Three-node timeline: Decision Point (commit `aba26aa`, the self-reported failure), Quorum's Prediction (DCS 19/100, DO NOT PROCEED, 6 flagged concerns), Git Record Confirms (5/5 predictions validated). Every card cites a real commit hash.
 
-<!-- SCREENSHOT: docs/assets/time-machine.png -->
+![Time Machine — Predictive DCS 19/100 validated against 5 real git commits, all CONFIRMED](docs/assets/time-machine.png)
 
 ---
 
