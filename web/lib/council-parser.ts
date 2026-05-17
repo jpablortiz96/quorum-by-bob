@@ -4,11 +4,11 @@ import type { AgentReport, Citation, CouncilData } from "@/types/quorum";
 import type { AgentSlug } from "@/types/quorum";
 
 function getDraftDir(): string {
-  return path.join(process.cwd(), "..", "docs", "decisions", "draft");
+  return path.join(process.cwd(), "content", "draft");
 }
 
 function getDecisionsDir(): string {
-  return path.join(process.cwd(), "..", "docs", "decisions");
+  return path.join(process.cwd(), "content");
 }
 
 function extractStance(content: string): string {

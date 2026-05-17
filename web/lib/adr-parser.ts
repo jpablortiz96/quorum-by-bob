@@ -3,7 +3,7 @@ import path from "path";
 import type { ADR } from "@/types/quorum";
 
 function getDecisionsDir(): string {
-  return path.join(process.cwd(), "..", "docs", "decisions");
+  return path.join(process.cwd(), "content");
 }
 
 export function getAllADRs(): ADR[] {
