@@ -87,16 +87,13 @@ The current Python implementation in [`booking_system_backend/services/booking.p
 
 ## Round 2: Cross-Examination Summary
 
-The Council conducted targeted cross-examinations between paired opponents. Only 4 of 6 agents produced Round 2 rebuttals; The Historian and Risk Officer did not respond to challenges.
+The Council conducted targeted cross-examinations between paired opponents. All 6 agents filed Round 2 rebuttals.
 
-| Confrontation | Challenger | Defender | Outcome |
-|---------------|-----------|----------|---------|
-| Status Quo vs Change | Reformer | Conservative | **Reformer prevails**. Reformer cited `commit 10d8576` (2026-04-13) proving hold workflow WAS integrated into Python backend, directly contradicting Conservative's claim that capability was "abandoned." Conservative's rebuttal about "zero commits" metric being misleading does not address this core evidence. |
-| Status Quo vs Change | Conservative | Reformer | **Conservative weakens Reformer's position**. Conservative cited `commit 4156ec0` (2026-04-23) and `commit 48b0bb4` (2026-04-28) showing continued feature development in consolidated codebase, proving "zero maintenance burden" claim was premature. However, this does not salvage Conservative's primary argument. |
-| Precedent vs Feasibility | Engineer | Historian | **Historian holds ground**. Engineer argued Java service failed due to "lack of testing infrastructure" (`commit 4156ec0` test files added post-consolidation), but this SUPPORTS Historian's position that organizational dysfunction—not architectural soundness—caused the 13-day failure. Engineer's evidence strengthens rather than weakens Historian's case. |
-| Precedent vs Feasibility | Historian | Engineer | **No rebuttal filed**. Historian did not respond to Engineer's challenge. |
-| Cost vs Risk | Economist | Risk Officer | **Economist prevails decisively**. Economist proved via `git_archaeology` that ZERO `.java` files exist in repository, meaning Risk Officer's "cross-service communication failures eliminated" argument quantifies phantom risks. The Java service was never deployed; there is no network boundary to eliminate. |
-| Cost vs Risk | Risk Officer | Economist | **No rebuttal filed**. Risk Officer did not respond to Economist's challenge. |
+| Confrontation | Outcome |
+|---------------|---------|
+| **Status Quo vs Change** (Conservative / Reformer) | **Split — both MAINTAIN.** Reformer cited `commit 10d8576` proving hold workflow was integrated into Python backend, contradicting Conservative's "abandoned capability" claim. Conservative countered that `commit 4156ec0` shows continued development without hold-state implementation, undermining the "zero maintenance burden" claim. Neither agent conceded. Net effect: Reformer's core argument holds; Conservative's secondary point on stability is valid. |
+| **Precedent vs Feasibility** (Historian / Engineer) | **Historian holds — both MAINTAIN.** Engineer argued the Java service failed due to organizational dysfunction rather than architectural unsoundness, and that Python is technically capable of the consolidation. Historian's rebuttal: "architecturally correct but technically incomplete" is precisely the organizational failure the 5-commit record documents — `aba26aa` introduced an incomplete service, `8f7ad7f` merged it anyway, `59f9b46` renamed it amid confusion. The pattern of accepting incomplete implementations as formally correct is what produced the 13-day failure cycle. Engineer's evidence strengthens, not weakens, Historian's case. |
+| **Cost vs Risk** (Economist / Risk Officer) | **Economist prevails on evidence; Risk Officer holds on reasoning — both MAINTAIN.** Economist demonstrated via repository scan that zero `.java` files exist, meaning Risk Officer's "cross-service communication failures eliminated" quantifies phantom risks from a service never deployed. Risk Officer's rebuttal: indeterminacy of past costs does not defer the current blast radius — `dependency_blast_radius("services/booking.py")` shows 10 consumers at criticality 58/100 as a live, measurable risk today regardless of the Java service's deployment status. Positions held; economic case remains the weakest link in the decision. |
 
 ### Impact on Decision Confidence Score
 
@@ -141,8 +138,7 @@ The cross-examination strengthened the historical and evidentiary case for conso
 - **Session ID:** quorum-2026-001
 - **Date:** 2026-05-16
 - **Repository:** demo-repo/galaxium-travels
-- **Agents Participating:** 6 of 6 (Round 1), 4 of 6 (Round 2)
+- **Agents Participating:** 6 of 6 (Round 1), 6 of 6 (Round 2)
 - **Total Evidence Citations:** 18 (7 commit hashes, 8 file:line references, 2 MCP tool outputs, 1 repository structure finding)
-- **Protocol:** Quorum Council 3-Round Protocol (Round 1 complete, Round 2 partial, Round 3 synthesis)
+- **Protocol:** Quorum Council 3-Round Protocol (Round 1 complete, Round 2 complete, Round 3 synthesis)
 - **Inadmissible Evidence:** None (all agents cited specific sources)
-- **Round 2 Non-Participation:** The Historian and The Risk Officer did not file rebuttals
